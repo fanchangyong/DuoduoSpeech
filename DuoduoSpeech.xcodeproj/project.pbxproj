@@ -9,21 +9,21 @@
 /* Begin PBXBuildFile section */
 		B1C025B3262555F700B7C18D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1C025B2262555F700B7C18D /* AppDelegate.swift */; };
 		B1C025B5262555F700B7C18D /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1C025B4262555F700B7C18D /* SceneDelegate.swift */; };
-		B1C025B7262555F700B7C18D /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1C025B6262555F700B7C18D /* ViewController.swift */; };
-		B1C025BA262555F700B7C18D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B1C025B8262555F700B7C18D /* Main.storyboard */; };
+		B1C025B7262555F700B7C18D /* RootViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1C025B6262555F700B7C18D /* RootViewController.swift */; };
 		B1C025BC262555F800B7C18D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B1C025BB262555F800B7C18D /* Assets.xcassets */; };
 		B1C025BF262555F800B7C18D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B1C025BD262555F800B7C18D /* LaunchScreen.storyboard */; };
+		B1C025CB262567E900B7C18D /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1C025CA262567E900B7C18D /* HomeViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		B1C025AF262555F700B7C18D /* DuoduoSpeech.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DuoduoSpeech.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B1C025B2262555F700B7C18D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B1C025B4262555F700B7C18D /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		B1C025B6262555F700B7C18D /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		B1C025B9262555F700B7C18D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		B1C025B6262555F700B7C18D /* RootViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootViewController.swift; sourceTree = "<group>"; };
 		B1C025BB262555F800B7C18D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B1C025BE262555F800B7C18D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		B1C025C0262555F800B7C18D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B1C025CA262567E900B7C18D /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,11 +58,11 @@
 			children = (
 				B1C025B2262555F700B7C18D /* AppDelegate.swift */,
 				B1C025B4262555F700B7C18D /* SceneDelegate.swift */,
-				B1C025B6262555F700B7C18D /* ViewController.swift */,
-				B1C025B8262555F700B7C18D /* Main.storyboard */,
+				B1C025B6262555F700B7C18D /* RootViewController.swift */,
 				B1C025BB262555F800B7C18D /* Assets.xcassets */,
 				B1C025BD262555F800B7C18D /* LaunchScreen.storyboard */,
 				B1C025C0262555F800B7C18D /* Info.plist */,
+				B1C025CA262567E900B7C18D /* HomeViewController.swift */,
 			);
 			path = DuoduoSpeech;
 			sourceTree = "<group>";
@@ -126,7 +126,6 @@
 			files = (
 				B1C025BF262555F800B7C18D /* LaunchScreen.storyboard in Resources */,
 				B1C025BC262555F800B7C18D /* Assets.xcassets in Resources */,
-				B1C025BA262555F700B7C18D /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -137,23 +136,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B1C025B7262555F700B7C18D /* ViewController.swift in Sources */,
+				B1C025B7262555F700B7C18D /* RootViewController.swift in Sources */,
 				B1C025B3262555F700B7C18D /* AppDelegate.swift in Sources */,
 				B1C025B5262555F700B7C18D /* SceneDelegate.swift in Sources */,
+				B1C025CB262567E900B7C18D /* HomeViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		B1C025B8262555F700B7C18D /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				B1C025B9262555F700B7C18D /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		B1C025BD262555F800B7C18D /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -287,6 +279,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 9Q58L4G663;
 				INFOPLIST_FILE = DuoduoSpeech/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -305,6 +298,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 9Q58L4G663;
 				INFOPLIST_FILE = DuoduoSpeech/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
