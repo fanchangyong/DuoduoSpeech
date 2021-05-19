@@ -8,18 +8,49 @@
 import UIKit
 import AVFoundation
 
+let placeholder = "请输入或粘贴内容"
+
 class HomeViewController: UIViewController {
-    private lazy var stackView: UIStackView = {
-        let stackView = UIStackView()
-        stackView.axis = .vertical
-        stackView.spacing = 10
-        stackView.translatesAutoresizingMaskIntoConstraints = false
-        return stackView
+    let synthezier = AVSpeechSynthesizer()
+    var playing = false
+
+    private lazy var topBar: UIView = {
+        let topBar = UIView()
+        self.view.addSubview(topBar)
+        topBar.backgroundColor = .systemIndigo
+        topBar.translatesAutoresizingMaskIntoConstraints = false
+        let constraints = [
+            topBar.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor),
+            topBar.trailingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.trailingAnchor),
+            topBar.topAnchor.constraint(equalTo: self.view.topAnchor),
+            topBar.heightAnchor.constraint(equalToConstant: 100),
+        ]
+        
+        for (index, item) in constraints.enumerated() {
+            item.identifier = "top-bar-constraint-\(index)"
+        }
+        
+        NSLayoutConstraint.activate(constraints)
+        return topBar
+    }()
+    
+    private lazy var topLabel: UILabel = {
+        let topLabel = UILabel()
+        self.view.addSubview(topLabel)
+        topLabel.text = "多多英语朗读"
+        topLabel.font = UIFont.systemFont(ofSize: 18, weight: .bold)
+        topLabel.textColor = .white
+        topLabel.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            topLabel.centerXAnchor.constraint(equalTo: topBar.centerXAnchor),
+            topLabel.bottomAnchor.constraint(equalTo: topBar.bottomAnchor, constant: -20)
+        ])
+        return topLabel
     }()
     
     private lazy var titleLabel: UILabel = {
         let label = UILabel()
-        label.text = "多多智能朗读"
+        // label.text = "多多智能朗读"
         label.font = UIFont.boldSystemFont(ofSize: 30)
         label.textAlignment = .center
         return label
@@ -27,62 +58,100 @@ class HomeViewController: UIViewController {
     
     private lazy var textView: UITextView = {
         let text = UITextView()
+        self.view.addSubview(text)
         text.isEditable = true
-        text.layer.borderWidth = 1
-        text.layer.borderColor = UIColor.lightGray.cgColor
+        text.textContainerInset = UIEdgeInsets(top: 6, left: 8, bottom: 6, right: 8)
+        text.font = UIFont.systemFont(ofSize: 16)
+        // text.layer.borderWidth = 1
+        // text.layer.borderColor = UIColor.lightGray.cgColor
         text.layer.cornerRadius = 5
-        text.heightAnchor.constraint(equalToConstant: 120).isActive = true
+        text.backgroundColor = .white
+        text.text = placeholder
+        text.textColor = .lightGray
+        text.delegate = self
+        text.addDoneButton(title: "Done", target: self, selector: #selector(tapDone))
+
+        let constraints = [
+            text.topAnchor.constraint(equalTo: topBar.bottomAnchor, constant: 50),
+            text.leadingAnchor.constraint(equalTo: self.view.leadingAnchor),
+            text.trailingAnchor.constraint(equalTo: self.view.trailingAnchor),
+            text.bottomAnchor.constraint(equalTo: self.btnSpeech.topAnchor, constant: -50),
+        ]
+        
+        for (index, item) in constraints.enumerated() {
+            item.identifier = "text-view-constraint-\(index)"
+        }
+        
+        text.translatesAutoresizingMaskIntoConstraints = false
+
+        NSLayoutConstraint.activate(constraints)
         return text
     }()
 
-    private lazy var textViewLabel: UILabel = {
-        let label = UILabel()
-        label.text = "请输入内容："
-        label.font = UIFont.systemFont(ofSize: 14)
-        return label
-    }()
-    
     private lazy var btnSpeech: UIButton = {
         let btn = UIButton()
+        self.view.addSubview(btn)
         btn.addTarget(self, action: #selector(onTouch), for: .touchUpInside)
         btn.setTitle("朗读", for: .normal)
-        btn.backgroundColor = .green
+        
+        let icon = UIImage(systemName: "play.fill")?.withTintColor(.white, renderingMode: .alwaysOriginal)
+        btn.titleEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 10)
+        btn.setImage(icon, for: .normal)
+        btn.backgroundColor = .systemIndigo
+        btn.semanticContentAttribute = .forceRightToLeft
+        
+        btn.layer.cornerRadius = 8
         btn.titleLabel?.font = UIFont.systemFont(ofSize: 14)
-        btn.frame = CGRect(x: 100, y: 100, width: 100, height: 100)
+        btn.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            btn.leadingAnchor.constraint(equalTo: self.view.layoutMarginsGuide.leadingAnchor),
+            btn.trailingAnchor.constraint(equalTo: self.view.layoutMarginsGuide.trailingAnchor),
+            btn.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor, constant: -10),
+            btn.heightAnchor.constraint(equalToConstant: 60),
+        ])
         return btn
     }()
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
-        self.view.addSubview(stackView)
-        self.configureStackView()
-    }
-    
-    func configureStackView() {
-        stackView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20).isActive = true
-        addHorizontalConstraint(stackView)
+        self.view.backgroundColor = .secondarySystemBackground
+        self.synthezier.delegate = self
+        self.view.addSubview(self.topBar)
+        self.view.addSubview(self.topLabel)
+        self.view.addSubview(self.textView)
+        self.view.addSubview(self.btnSpeech)
         
-        stackView.addArrangedSubview(titleLabel)
-        stackView.addArrangedSubview(textViewLabel)
-        stackView.addArrangedSubview(textView)
-        stackView.addArrangedSubview(btnSpeech)
-
-        stackView.setCustomSpacing(30, after: titleLabel)
+        // Do any additional setup after loading the view.
     }
     
-    func addHorizontalConstraint(_ view: UIView) {
-        view.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor, constant: 20).isActive = true
-        view.trailingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.trailingAnchor, constant: -20).isActive = true
+    func toggleButton() {
+        playing = !playing
+        if (playing) {
+            self.btnSpeech.setTitle("暂停", for: .normal)
+            let icon = UIImage(systemName: "pause.fill")?.withTintColor(.white, renderingMode: .alwaysOriginal)
+            self.btnSpeech.setImage(icon, for: .normal)
+        } else {
+            self.btnSpeech.setTitle("朗读", for: .normal)
+            let icon = UIImage(systemName: "play.fill")?.withTintColor(.white, renderingMode: .alwaysOriginal)
+            self.btnSpeech.setImage(icon, for: .normal)
+        }
     }
 
     @objc func onTouch() {
-        if let text = textView.text {
-            print("onTouch, text: \(text)")
+        if let text = textView.text, text != placeholder, !playing {
+            print("to speak, text: \(text)")
             let utterance = AVSpeechUtterance(string: text)
-            AVSpeechSynthesizer().speak(utterance)
+            synthezier.speak(utterance)
+            toggleButton()
+        } else if playing {
+            print("to pause")
+            synthezier.pauseSpeaking(at: .immediate)
+            toggleButton()
         }
+    }
+    
+    @objc func tapDone() {
+        self.textView.endEditing(true)
     }
 
     /*
@@ -95,4 +164,39 @@ class HomeViewController: UIViewController {
     }
     */
 
+}
+
+extension HomeViewController: AVSpeechSynthesizerDelegate {
+    func speechSynthesizer(_ synthesizer: AVSpeechSynthesizer, didFinish utterance: AVSpeechUtterance) {
+        print("did finish")
+        if (playing) {
+            self.toggleButton()
+        }
+    }
+}
+
+extension HomeViewController: UITextViewDelegate {
+    func textViewDidBeginEditing(_ textView: UITextView) {
+        if textView.textColor == .lightGray {
+            textView.text = nil
+            textView.textColor = .black
+        }
+    }
+    
+    func textViewDidEndEditing(_ textView: UITextView) {
+        if textView.text.isEmpty {
+            textView.text = placeholder
+            textView.textColor = .lightGray
+        }
+    }
+}
+
+extension UITextView {
+    func addDoneButton(title: String, target: Any, selector: Selector) {
+        let toolBar = UIToolbar(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.size.width, height: 44.0))
+        let flexible = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
+        let barButton = UIBarButtonItem(title: title, style: .plain, target: target, action: selector)
+        toolBar.setItems([flexible, barButton], animated: false)
+        self.inputAccessoryView = toolBar
+    }
 }

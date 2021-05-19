@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		B1C025B3262555F700B7C18D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1C025B2262555F700B7C18D /* AppDelegate.swift */; };
 		B1C025B5262555F700B7C18D /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1C025B4262555F700B7C18D /* SceneDelegate.swift */; };
-		B1C025B7262555F700B7C18D /* RootViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1C025B6262555F700B7C18D /* RootViewController.swift */; };
 		B1C025BC262555F800B7C18D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B1C025BB262555F800B7C18D /* Assets.xcassets */; };
 		B1C025BF262555F800B7C18D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B1C025BD262555F800B7C18D /* LaunchScreen.storyboard */; };
 		B1C025CB262567E900B7C18D /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1C025CA262567E900B7C18D /* HomeViewController.swift */; };
@@ -19,7 +18,6 @@
 		B1C025AF262555F700B7C18D /* DuoduoSpeech.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DuoduoSpeech.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B1C025B2262555F700B7C18D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B1C025B4262555F700B7C18D /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		B1C025B6262555F700B7C18D /* RootViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootViewController.swift; sourceTree = "<group>"; };
 		B1C025BB262555F800B7C18D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B1C025BE262555F800B7C18D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		B1C025C0262555F800B7C18D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -58,7 +56,6 @@
 			children = (
 				B1C025B2262555F700B7C18D /* AppDelegate.swift */,
 				B1C025B4262555F700B7C18D /* SceneDelegate.swift */,
-				B1C025B6262555F700B7C18D /* RootViewController.swift */,
 				B1C025BB262555F800B7C18D /* Assets.xcassets */,
 				B1C025BD262555F800B7C18D /* LaunchScreen.storyboard */,
 				B1C025C0262555F800B7C18D /* Info.plist */,
@@ -136,7 +133,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B1C025B7262555F700B7C18D /* RootViewController.swift in Sources */,
 				B1C025B3262555F700B7C18D /* AppDelegate.swift in Sources */,
 				B1C025B5262555F700B7C18D /* SceneDelegate.swift in Sources */,
 				B1C025CB262567E900B7C18D /* HomeViewController.swift in Sources */,
@@ -279,16 +275,17 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 9Q58L4G663;
+				CURRENT_PROJECT_VERSION = 3;
+				DEVELOPMENT_TEAM = PKUVM4XC6D;
 				INFOPLIST_FILE = DuoduoSpeech/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.fancy.DuoduoSpeech;
+				PRODUCT_BUNDLE_IDENTIFIER = com.fanchangyong.DuoduoSpeech;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -298,16 +295,17 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 9Q58L4G663;
+				CURRENT_PROJECT_VERSION = 3;
+				DEVELOPMENT_TEAM = PKUVM4XC6D;
 				INFOPLIST_FILE = DuoduoSpeech/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.fancy.DuoduoSpeech;
+				PRODUCT_BUNDLE_IDENTIFIER = com.fanchangyong.DuoduoSpeech;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
