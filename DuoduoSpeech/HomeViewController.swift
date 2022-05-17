@@ -50,7 +50,6 @@ class HomeViewController: UIViewController {
     
     private lazy var titleLabel: UILabel = {
         let label = UILabel()
-        // label.text = "多多智能朗读"
         label.font = UIFont.boldSystemFont(ofSize: 30)
         label.textAlignment = .center
         return label
@@ -62,8 +61,6 @@ class HomeViewController: UIViewController {
         text.isEditable = true
         text.textContainerInset = UIEdgeInsets(top: 6, left: 8, bottom: 6, right: 8)
         text.font = UIFont.systemFont(ofSize: 16)
-        // text.layer.borderWidth = 1
-        // text.layer.borderColor = UIColor.lightGray.cgColor
         text.layer.cornerRadius = 5
         text.backgroundColor = .white
         text.text = placeholder
