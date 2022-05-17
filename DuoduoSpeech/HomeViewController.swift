@@ -17,7 +17,7 @@ class HomeViewController: UIViewController {
     private lazy var topBar: UIView = {
         let topBar = UIView()
         self.view.addSubview(topBar)
-        topBar.backgroundColor = .systemIndigo
+        topBar.backgroundColor = .systemBlue
         topBar.translatesAutoresizingMaskIntoConstraints = false
         let constraints = [
             topBar.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor),
@@ -38,7 +38,7 @@ class HomeViewController: UIViewController {
         let topLabel = UILabel()
         self.view.addSubview(topLabel)
         topLabel.text = "多多英语朗读"
-        topLabel.font = UIFont.systemFont(ofSize: 18, weight: .bold)
+        topLabel.font = .preferredFont(forTextStyle: .headline)
         topLabel.textColor = .white
         topLabel.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
@@ -66,7 +66,13 @@ class HomeViewController: UIViewController {
         text.text = placeholder
         text.textColor = .lightGray
         text.delegate = self
-        text.addDoneButton(title: "Done", target: self, selector: #selector(tapDone))
+        
+        let flexible = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
+        
+        let clearButton = UIBarButtonItem(title: "Clear", style: .plain, target: self, action: #selector(tapClear))
+        let doneButton = UIBarButtonItem(title: "Done", style: .plain, target: self, action: #selector(tapDone))
+        
+        text.addToolbar(flexible, clearButton, doneButton)
 
         let constraints = [
             text.topAnchor.constraint(equalTo: topBar.bottomAnchor, constant: 50),
@@ -94,7 +100,7 @@ class HomeViewController: UIViewController {
         let icon = UIImage(systemName: "play.fill")?.withTintColor(.white, renderingMode: .alwaysOriginal)
         btn.titleEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 10)
         btn.setImage(icon, for: .normal)
-        btn.backgroundColor = .systemIndigo
+        btn.backgroundColor = .systemBlue
         btn.semanticContentAttribute = .forceRightToLeft
         
         btn.layer.cornerRadius = 8
@@ -152,6 +158,10 @@ class HomeViewController: UIViewController {
     @objc func tapDone() {
         self.textView.endEditing(true)
     }
+    
+    @objc func tapClear() {
+        self.textView.text = ""
+    }
 
     /*
     // MARK: - Navigation
@@ -190,11 +200,9 @@ extension HomeViewController: UITextViewDelegate {
 }
 
 extension UITextView {
-    func addDoneButton(title: String, target: Any, selector: Selector) {
+    func addToolbar(_ barItems: UIBarButtonItem...) {
         let toolBar = UIToolbar(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.size.width, height: 44.0))
-        let flexible = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
-        let barButton = UIBarButtonItem(title: title, style: .plain, target: target, action: selector)
-        toolBar.setItems([flexible, barButton], animated: false)
+        toolBar.setItems(barItems, animated: false)
         self.inputAccessoryView = toolBar
     }
 }
