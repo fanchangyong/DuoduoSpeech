@@ -139,12 +139,14 @@ class HomeViewController: UIViewController {
 
     @objc func onTouch() {
         if let text = textView.text, text != placeholder, !playing {
-            print("to speak, text: \(text)")
             let utterance = AVSpeechUtterance(string: text)
-            synthezier.speak(utterance)
+            if (self.synthezier.isPaused) {
+                self.synthezier.continueSpeaking()
+            } else {
+                synthezier.speak(utterance)
+            }
             toggleButton()
         } else if playing {
-            print("to pause")
             synthezier.pauseSpeaking(at: .immediate)
             toggleButton()
         }
@@ -168,7 +170,6 @@ class HomeViewController: UIViewController {
 
 extension HomeViewController: AVSpeechSynthesizerDelegate {
     func speechSynthesizer(_ synthesizer: AVSpeechSynthesizer, didFinish utterance: AVSpeechUtterance) {
-        print("did finish")
         if (playing) {
             self.toggleButton()
         }
